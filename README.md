@@ -1,4 +1,4 @@
-<p align="center">
+<!-- <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
 
@@ -19,54 +19,113 @@
   <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
 </p>
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)--> -->
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+[classroom](https://drive.google.com/file/d/1tea30vjFEShpsUHZwsFb-FS81lEt8NKO/view?usp=classroom_web&authuser=0) primero descargar en archivo que esta adjunto de la clase taller de aplicacion en internet, archivo docker_files.zip.
+
+## docker-compose.yml
+Copia o modifica estos datos en el docker-compose.yml
+
+```bash
+version: '3'
+
+services:
+  myDB:
+    image: postgres:15.3
+    container_name: proyecto-keep
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=sa
+      - POSTGRES_PASSWORD=1844
+      - POSTGRES_DB=googlekeep-db
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+
+```
+
+una vez que modificaste, ejecuta este comando en donde se encuentra el docker-compose.yml
+
+
+```bash
+$ docker compose up -d 
+```
+
+con esto levantamos el contenedor
 
 ## Project setup
+
+una vez clonado el respository, ejecutamos estos comando
 
 ```bash
 $ npm install
 ```
 
-## Compile and run the project
+```bash
+$ npm install class-validator class-transformer
+```
+```bash
+npm add @nestjs/jwt bcrypt
+```
 
 ```bash
-# development
-$ npm run start
+npm add -D @types/bcrypt
+```
 
+```bash
+npm add @nestjs/typeorm @nestjs/config @nestjs/swagger @nestjs/jwt typeorm pg bcrypt
+```
+
+## Compile and run the project
+
+# development
+
+```bash
+$ npm run start
+```
 # watch mode
+
+```bash
 $ npm run start:dev
+```
 
 # production mode
+
+```bash
 $ npm run start:prod
 ```
 
 ## Run tests
 
-```bash
 # unit tests
-$ npm run test
 
+```bash
+$ npm run test
+```
 # e2e tests
+
+```bash
 $ npm run test:e2e
+```
 
 # test coverage
+```bash
 $ npm run test:cov
 ```
 
-## Deployment
+<!-- ## Deployment
 
 When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
 
 If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
 
-```bash
+bash
 $ npm install -g @nestjs/mau
 $ mau deploy
-```
+
 
 With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
 
@@ -95,4 +154,4 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 ## License
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE). -->
