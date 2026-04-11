@@ -16,12 +16,29 @@ import { JwtModule } from '@nestjs/jwt';
       load: [ormConfig],
       expandVariables: true,
     }),
+
     TypeOrmModule.forRootAsync({
-      useFactory: ormConfig
+      useFactory: ormConfig,
     }),
+
+    // TypeOrmModule.forRoot({
+    //   type: 'postgres',
+    //   host: process.env.DB_HOST,
+    //   port: +(process.env.DB_PORT || 5432),
+    //   username: process.env.DB_USERNAME,
+    //   password: process.env.DB_PASSWORD,
+    //   database: process.env.DB_NAME,
+    //   autoLoadEntities: true, // Carga automáticamente las entidades registradas en el módulo
+    //   synchronize: true, // Solo para desarrollo, no usar en producción
+    //   dropSchema: true, // Solo para desarrollo, no usar en producción
+    //   ssl: {
+    //     rejectUnauthorized: false, // Permite conexiones SSL sin verificar el certificado (útil para desarrollo)
+    //   }
+    // }),
     JwtModule.register({
-      global: true,               // disponible en toda la app
-      secret: 'vWao0YN55tVgehJHqdqHy8f4fq0qrZaURbmrArAORGkizcw2ceUs7wat3uFPl2TEruW7ON8L3DNn6FTgxa4Fwy', // cambiá esto por algo seguro
+      global: true,
+
+      secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '8h' },
     }),
     TypeOrmModule.forFeature([Usuario])
