@@ -24,6 +24,7 @@ async function bootstrap() {
     .setTitle('GoogleKeep API')
     .setDescription('Documentación de la API')
     .setVersion('1.0')
+    .addBearerAuth() // Agrega soporte para autenticación Bearer (JWT)
     .build();
 
   
