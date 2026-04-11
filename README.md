@@ -34,16 +34,16 @@ version: '3'
 services:
   myDB:
     image: postgres:15.3
-    container_name: proyecto-keep
     restart: always
     ports:
-      - 5432:5432
+      - "5432:5432"
     environment:
       - POSTGRES_USER=sa
-      - POSTGRES_PASSWORD=1844
-      - POSTGRES_DB=googlekeep-db
+      - POSTGRES_PASSWORD: ${DB_PASSWORD}
+      - POSTGRES_DB: ${DB_NAME}
+    container_name: proyecto-keep
     volumes:
-      - ./postgres:/var/lib/postgresql/data
+      - ./postgres:/var/lib/postgresql/data      
 
 ```
 
