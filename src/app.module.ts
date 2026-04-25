@@ -8,6 +8,12 @@ import { Usuario } from './usuario/model/usuario.model';
 import { ConfigModule } from '@nestjs/config';
 import { UsuarioService } from './usuario/usuario.service';
 import { JwtModule } from '@nestjs/jwt';
+import { AttachmentController } from './attachment/attachment.controller';
+import { AttachmentService } from './attachment/attachment.service';
+import { Attachment } from './attachment/model/attachment.model';
+import { Note } from './note/model/note.model';
+import { NoteController } from './note/note.controller';
+import { NoteService } from './note/note.service';
 
 @Module({
   imports: [
@@ -41,14 +47,18 @@ import { JwtModule } from '@nestjs/jwt';
       secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '8h' },
     }),
-    TypeOrmModule.forFeature([Usuario])
+    TypeOrmModule.forFeature([Usuario, Attachment, Note]),
   ],
   controllers: [
     AppController,
     UsuarioController,
+    AttachmentController,
+    NoteController,
   ],
   providers: [
-    UsuarioService
+    UsuarioService,
+    AttachmentService,
+    NoteService,
   ],
 })
 export class AppModule {}
