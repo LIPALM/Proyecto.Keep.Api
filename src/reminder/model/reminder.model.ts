@@ -1,4 +1,4 @@
-import { Usuario } from 'src/usuario/model/usuario.model';
+import { Note } from 'src/note/model/note.model';
 import {
   Column,
   CreateDateColumn,
@@ -10,29 +10,32 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class Note {
+export class Reminder {
   @PrimaryGeneratedColumn()
   id!: number;
-
-  @ManyToOne(() => Usuario, { nullable: false, eager: false })
-  @JoinColumn({ name: 'usuario_id' })
-  usuario!: Usuario;
 
   @Column({ length: 150 })
   title!: string;
 
-  @Column({ type: 'text' })
-  content!: string;
+  @Column({ type: 'text', nullable: true })
+  description?: string;
+
+  @Column({ type: 'timestamp' })
+  remind_at!: Date;
+
+  @Column({ default: false })
+  is_completed!: boolean;
 
   @Column({ default: true })
   activo!: boolean;
+
+  @ManyToOne(() => Note, { nullable: false, onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'note_id' })
+  note!: Note;
 
   @CreateDateColumn()
   created_at!: Date;
 
   @UpdateDateColumn()
   updated_at!: Date;
-
-  @Column({ type: 'timestamp', nullable: true })
-  deleted_at?: Date; // 👈 Campo para soft delete
 }
