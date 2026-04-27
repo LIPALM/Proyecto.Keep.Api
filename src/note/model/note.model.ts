@@ -1,7 +1,10 @@
+import { Usuario } from 'src/usuario/model/usuario.model';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -10,6 +13,10 @@ import {
 export class Note {
   @PrimaryGeneratedColumn()
   id!: number;
+
+  @ManyToOne(() => Usuario, { nullable: false, eager: false })
+  @JoinColumn({ name: 'usuario_id' })
+  usuario!: Usuario;
 
   @Column({ length: 150 })
   title!: string;
@@ -25,4 +32,7 @@ export class Note {
 
   @UpdateDateColumn()
   updated_at!: Date;
+
+  @Column({ type: 'timestamp', nullable: true })
+  deleted_at?: Date; // 👈 Campo para soft delete
 }

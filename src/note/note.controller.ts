@@ -6,6 +6,7 @@ import {
   Param,
   ParseIntPipe,
   Post,
+  Req,
   UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
@@ -20,14 +21,22 @@ export class NoteController {
 
   @UseGuards(AuthGuard)
   @Get()
-  getAll() {
-    return this.service.getAll();
+  getAll(@Req() req: any) {
+    const usuarioId = req.user.sub;
+    return this.service.getAll(usuarioId);
   }
 
   @UseGuards(AuthGuard)
   @Get('getactive')
-  getActive() {
-    return this.service.getActive();
+  getActive(@Req() req: any) {
+    const usuarioId = req.user.sub;
+    return this.service.getActive(usuarioId);
+  }
+
+  @UseGuards(AuthGuard)
+  @Get('getbyusuario/:usuarioId')
+  getByUsuarioId(@Param('usuarioId', ParseIntPipe) usuarioId: number) {
+    return this.service.getByUsuarioId(usuarioId);
   }
 
   @UseGuards(AuthGuard)
@@ -37,14 +46,37 @@ export class NoteController {
   }
 
   @UseGuards(AuthGuard)
+  @Get('trash')
+  getTrash(@Req() req: any) {
+    const usuarioId = req.user.sub;
+    return this.service.getTrash(usuarioId);
+  }
+
+  @UseGuards(AuthGuard)
   @Post('save')
-  async save(@Body() data: NoteDto) {
-    return await this.service.save(data);
+  async save(@Body() data: NoteDto, @Req() req: any) {
+    const usuarioId = req.user.sub;
+    return await this.service.save(data, usuarioId);
   }
 
   @UseGuards(AuthGuard)
   @Delete('delete/:id')
-  async delete(@Param('id', ParseIntPipe) id: number) {
-    return await this.service.delete(id);
+  async delete(@Param('id', ParseIntPipe) id: number, @Req() req: any) {
+    const usuarioId = req.user.sub;
+    return await this.service.delete(id, usuarioId);
+  }
+
+  @UseGuards(AuthGuard)
+  @Post('restore/:id')
+  async restore(@Param('id', ParseIntPipe) id: number, @Req() req: any) {
+    const usuarioId = req.user.sub;
+    return await this.service.restore(id, usuarioId);
+  }
+
+  @UseGuards(AuthGuard)
+  @Delete('permanent/:id')
+  async permanentDelete(@Param('id', ParseIntPipe) id: number, @Req() req: any) {
+    const usuarioId = req.user.sub;
+    return await this.service.permanentDelete(id, usuarioId);
   }
 }
