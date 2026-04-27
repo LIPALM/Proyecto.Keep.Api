@@ -13,6 +13,9 @@ import { AttachmentService } from './attachment/attachment.service';
 import { Attachment } from './attachment/model/attachment.model';
 import { Note } from './note/model/note.model';
 import { NoteController } from './note/note.controller';
+import { Reminder } from './reminder/model/reminder.model';
+import { ReminderController } from './reminder/reminder.controller';
+import { ReminderService } from './reminder/reminder.service';
 import { NoteService } from './note/note.service';
 
 @Module({
@@ -47,18 +50,20 @@ import { NoteService } from './note/note.service';
       secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '8h' },
     }),
-    TypeOrmModule.forFeature([Usuario, Attachment, Note]),
+    TypeOrmModule.forFeature([Usuario, Attachment, Note, Reminder]),
   ],
   controllers: [
     AppController,
     UsuarioController,
     AttachmentController,
     NoteController,
+    ReminderController,
   ],
   providers: [
     UsuarioService,
     AttachmentService,
     NoteService,
+    ReminderService,
   ],
 })
 export class AppModule {}
